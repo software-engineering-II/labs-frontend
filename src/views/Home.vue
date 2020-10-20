@@ -8,11 +8,12 @@
 </template>
 
 <script>
+  import {getAuthenticationToken} from '@/dataStorage';
 
   export default{
     name: "Home",
     beforeCreate( ){
-      if( !localStorage.getItem( 'token' ) ){
+      if( !getAuthenticationToken( ) ){
         this.$router.push( {name: 'login'} )
       }
     }

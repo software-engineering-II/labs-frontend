@@ -40,6 +40,7 @@
 </template>
 <script>
     import axios from 'axios';
+    import {setAuthenticationToken} from '@/dataStorage';
 
     const path = "/oauth/token";
 
@@ -75,8 +76,8 @@
                     if( response.status !== 200 ){
                         alert( "Error en la autenticación" );
                     }else{
-                        localStorage.setItem( 'token', response.data.access_token );
-                        alert( "¡Autenticación Exitosa! El token se ha almacenado en el Local Storage" )
+                        setAuthenticationToken( response.data.access_token );
+                        this.$router.push( {name: 'home'} );
                     }
                 } ).catch( error => {
                     if( error.response.status === 400 ){
